@@ -16,12 +16,12 @@ export default function TermosPage() {
 
         <div className="prose prose-lg mx-auto max-w-full text-gray-700">
           <p>
-            Bem-vindo ao Tuca Noronha. Ao utilizar nossos serviços, você concorda com os seguintes termos e condições. Por favor, leia-os com atenção.
+            Bem-vindo ao Viva Noronha. Ao utilizar nossos serviços, você concorda com os seguintes termos e condições. Por favor, leia-os com atenção.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-800">1. Nossos Serviços</h2>
           <p>
-            O Tuca Noronha atua como um hub central de turismo para Fernando de Noronha, conectando viajantes a uma rede de serviços locais, incluindo, mas não se limitando a, atividades, passeios, eventos e reservas. Atuamos como intermediários entre você e os fornecedores finais dos serviços.
+            O Viva Noronha atua como um hub central de turismo para Fernando de Noronha, conectando viajantes a uma rede de serviços locais, incluindo, mas não se limitando a, atividades, passeios, eventos e reservas. Atuamos como intermediários entre você e os fornecedores finais dos serviços.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-800">2. Reservas e Pagamentos</h2>
@@ -41,12 +41,12 @@ export default function TermosPage() {
 
           <h2 className="text-2xl font-bold text-gray-800">5. Limitação de Responsabilidade</h2>
           <p>
-            O Tuca Noronha não se responsabiliza por quaisquer danos, perdas, acidentes, ou despesas que possam ocorrer durante a prestação dos serviços pelos fornecedores parceiros. Nossa responsabilidade limita-se à intermediação da reserva. Não garantimos a qualidade ou segurança dos serviços prestados por terceiros.
+            O Viva Noronha não se responsabiliza por quaisquer danos, perdas, acidentes, ou despesas que possam ocorrer durante a prestação dos serviços pelos fornecedores parceiros. Nossa responsabilidade limita-se à intermediação da reserva. Não garantimos a qualidade ou segurança dos serviços prestados por terceiros.
           </p>
           
           <h2 className="text-2xl font-bold text-gray-800">6. Propriedade Intelectual</h2>
           <p>
-            Todo o conteúdo deste site, incluindo textos, imagens, logotipos e design, é propriedade do Tuca Noronha e protegido por leis de direitos autorais. É proibida a sua reprodução ou uso não autorizado.
+            Todo o conteúdo deste site, incluindo textos, imagens, logotipos e design, é propriedade do Viva Noronha e protegido por leis de direitos autorais. É proibida a sua reprodução ou uso não autorizado.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-800">7. Alterações nos Termos</h2>

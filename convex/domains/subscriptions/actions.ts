@@ -282,7 +282,7 @@ export const createSubscriptionPreference = action({
         },
         auto_return: "approved",
         external_reference: `guide_${args.userId}`,
-        statement_descriptor: "TUCA NORONHA", // Aparece na fatura do cartão
+        statement_descriptor: "VIVA NORONHA", // Aparece na fatura do cartão
         notification_url: process.env.CONVEX_SITE_URL ? 
           `${process.env.CONVEX_SITE_URL}/mercadopago/subscription-webhook` : 
           undefined,

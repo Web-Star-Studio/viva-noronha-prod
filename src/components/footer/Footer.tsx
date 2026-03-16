@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
-            <h3 className="text-xl font-medium tracking-tight mb-6">Tuca Noronha</h3>
+            <h3 className="text-xl font-medium tracking-tight mb-6">Viva Noronha</h3>
             <p className="mb-8 text-muted-foreground max-w-md">
               Sua agência especializada em experiências exclusivas em Fernando de Noronha, comprometida com a sustentabilidade e a preservação do paraíso.
             </p>

@@ -10,7 +10,7 @@ interface VoucherPageProps {
 export async function generateMetadata({ params }: VoucherPageProps): Promise<Metadata> {
   const { code } = await params;
   return {
-    title: `Voucher ${code} - Tuca Noronha`,
+    title: `Voucher ${code} - Viva Noronha`,
     description: "Visualize e baixe seu voucher de reserva",
   };
 }

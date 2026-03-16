@@ -28,7 +28,7 @@ export default function FeatureHighlights() {
             Por Que Nos Escolher
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Descubra o que torna a Tuca Noronha a melhor opção para sua viagem inesquecível
+            Descubra o que torna a Viva Noronha a melhor opção para sua viagem inesquecível
           </p>
         </motion.div>
 

@@ -8,7 +8,7 @@ const getMinimalTemplate = (content: string): string => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuca Noronha</title>
+    <title>Viva Noronha</title>
 </head>
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
     <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
@@ -18,7 +18,7 @@ const getMinimalTemplate = (content: string): string => {
                     <!-- Logo -->
                     <tr>
                         <td align="center" style="padding: 40px 40px 20px 40px;">
-                            <img src="https://qgvvzy3mml.ufs.sh/f/0xZ1EvLKAEpzfpXCGmZS0RtQBhX7sAUFKkL4TzbvlnwWgr2Y" alt="Tuca Noronha" style="max-width: 180px; height: auto;" />
+                            <img src="https://qgvvzy3mml.ufs.sh/f/0xZ1EvLKAEpzfpXCGmZS0RtQBhX7sAUFKkL4TzbvlnwWgr2Y" alt="Viva Noronha" style="max-width: 180px; height: auto;" />
                         </td>
                     </tr>
                     <!-- Content -->
@@ -31,7 +31,7 @@ const getMinimalTemplate = (content: string): string => {
                     <tr>
                         <td style="background-color: #f9fafb; padding: 30px 40px; text-align: center; border-top: 1px solid #e5e7eb;">
                             <p style="margin: 0; color: #6b7280; font-size: 14px;">
-                                © ${new Date().getFullYear()} Tuca Noronha - Experiências em Fernando de Noronha
+                                © ${new Date().getFullYear()} Viva Noronha - Experiências em Fernando de Noronha
                             </p>
                             <p style="margin: 8px 0 0 0; color: #9ca3af; font-size: 12px;">
                                 Este é um email automático, por favor não responda.
@@ -436,7 +436,7 @@ export const bookingCancelledEmail = (): string => {
 export const welcomeNewUserEmail = (): string => {
   const content = `
     <h1 style="margin: 0 0 8px 0; color: #111827; font-size: 24px; font-weight: 700;">
-      Bem-vindo ao Tuca Noronha!
+      Bem-vindo ao Viva Noronha!
     </h1>
     <p style="margin: 0 0 24px 0; color: #6b7280; font-size: 16px;">
       Sua conta foi criada com sucesso.

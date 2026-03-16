@@ -311,7 +311,7 @@ export const sendWelcomeEmail = internalAction({
       const emailData: WelcomeNewUserEmailData = {
         type: "welcome_new_user",
         to: args.userEmail,
-        subject: `Bem-vindo ao Tuca Noronha, ${args.userName}! 🏝️`,
+        subject: `Bem-vindo ao Viva Noronha, ${args.userName}! 🏝️`,
         userName: args.userName,
         userEmail: args.userEmail,
         userRole: args.userRole,
@@ -770,7 +770,7 @@ export const testEmailService = action({
       const emailData: WelcomeNewUserEmailData = {
         type: "welcome_new_user",
         to: args.testEmail,
-        subject: "Teste do Sistema de Email - Tuca Noronha",
+        subject: "Teste do Sistema de Email - Viva Noronha",
         userName: "Usuário Teste",
         userEmail: args.testEmail,
         userRole: "traveler",

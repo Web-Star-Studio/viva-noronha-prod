@@ -213,7 +213,7 @@ export default function OnboardingPage() {
             </div>
             <CardTitle className="text-2xl font-bold">Complete seu perfil</CardTitle>
             <CardDescription>
-              Para começar a usar o Tuca Noronha, precisamos de algumas informações básicas
+              Para começar a usar o Viva Noronha, precisamos de algumas informações básicas
             </CardDescription>
           </CardHeader>
 

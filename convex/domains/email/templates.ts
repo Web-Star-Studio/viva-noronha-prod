@@ -46,7 +46,7 @@ const getBaseTemplate = (content: string): string => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuca Noronha</title>
+    <title>Viva Noronha</title>
     <style>
         * {
             margin: 0;
@@ -292,11 +292,11 @@ export const getBookingConfirmationTemplate = (data: any): string => {
             
             <p>Se você tiver alguma dúvida, entre em contato conosco através do nosso suporte.</p>
             
-            <p>Obrigado por escolher o Tuca Noronha! ✈️🏝️</p>
+            <p>Obrigado por escolher o Viva Noronha! ✈️🏝️</p>
         </div>
         
         <div class="footer">
-            <p>Tuca Noronha - Sua experiência em Fernando de Noronha</p>
+            <p>Viva Noronha - Sua experiência em Fernando de Noronha</p>
             <p>📧 atendimentotucanoronha@gmail.com | 📱 (81) 979097547</p>
             <p><a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tuca-noronha.vercel.app"}">${process.env.NEXT_PUBLIC_APP_URL ? new URL(process.env.NEXT_PUBLIC_APP_URL).hostname : "www.tuca-noronha.vercel.app"}</a></p>
         </div>
@@ -364,7 +364,7 @@ export const getBookingCancelledTemplate = (data: any): string => {
         </div>
         
         <div class="footer">
-            <p>Tuca Noronha - Sua experiência em Fernando de Noronha</p>
+            <p>Viva Noronha - Sua experiência em Fernando de Noronha</p>
             <p>📧 atendimentotucanoronha@gmail.com | 📱 (81) 979097547</p>
             <p><a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tuca-noronha.vercel.app"}">${process.env.NEXT_PUBLIC_APP_URL ? new URL(process.env.NEXT_PUBLIC_APP_URL).hostname : "www.tuca-noronha.vercel.app"}</a></p>
         </div>
@@ -471,7 +471,7 @@ export const getPartnerNewBookingTemplate = (data: any): string => {
         </div>
         
         <div class="footer">
-            <p>Tuca Noronha - Portal do Parceiro</p>
+            <p>Viva Noronha - Portal do Parceiro</p>
             <p>📧 parceiros@tucanoronha.com | 📱 (81) 979097547</p>
             <p><a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tuca-noronha.vercel.app"}">${process.env.NEXT_PUBLIC_APP_URL ? new URL(process.env.NEXT_PUBLIC_APP_URL).hostname : "www.tuca-noronha.vercel.app"}</a></p>
         </div>
@@ -485,7 +485,7 @@ export const getPartnerNewBookingTemplate = (data: any): string => {
 export const getWelcomeNewUserTemplate = (data: any): string => {
   const roleMessages = {
     traveler: {
-      title: "🏝️ Bem-vindo ao Tuca Noronha!",
+      title: "🏝️ Bem-vindo ao Viva Noronha!",
       message: "Estamos animados para ajudá-lo a descobrir as maravilhas de Fernando de Noronha!",
       features: [
         "🎯 Explore atividades exclusivas",
@@ -506,7 +506,7 @@ export const getWelcomeNewUserTemplate = (data: any): string => {
     },
     employee: {
       title: "👋 Bem-vindo à Equipe!",
-      message: "Estamos felizes em tê-lo como parte da equipe Tuca Noronha!",
+      message: "Estamos felizes em tê-lo como parte da equipe Viva Noronha!",
       features: [
         "🎯 Gerencie operações",
         "👥 Suporte aos clientes",
@@ -516,7 +516,7 @@ export const getWelcomeNewUserTemplate = (data: any): string => {
     },
     master: {
       title: "🚀 Bem-vindo, Administrador!",
-      message: "Você tem acesso completo à plataforma Tuca Noronha!",
+      message: "Você tem acesso completo à plataforma Viva Noronha!",
       features: [
         "🔧 Controle total do sistema",
         "👥 Gestão de usuários",
@@ -568,11 +568,11 @@ export const getWelcomeNewUserTemplate = (data: any): string => {
             
             <p>Se você tiver alguma dúvida ou precisar de ajuda, nossa equipe de suporte está sempre disponível.</p>
             
-            <p>Bem-vindo à família Tuca Noronha! 🌺</p>
+            <p>Bem-vindo à família Viva Noronha! 🌺</p>
         </div>
         
         <div class="footer">
-            <p>Tuca Noronha - Sua experiência em Fernando de Noronha</p>
+            <p>Viva Noronha - Sua experiência em Fernando de Noronha</p>
             <p>📧 atendimentotucanoronha@gmail.com | 📱 (81) 979097547</p>
             <p><a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tuca-noronha.vercel.app"}">${process.env.NEXT_PUBLIC_APP_URL ? new URL(process.env.NEXT_PUBLIC_APP_URL).hostname : "www.tuca-noronha.vercel.app"}</a></p>
         </div>
@@ -634,7 +634,7 @@ export const getPackageFlightBookingStartedTemplate = (data: any): string => {
         </div>
         
         <div class="footer">
-            <p>Tuca Noronha - Sua experiência em Fernando de Noronha</p>
+            <p>Viva Noronha - Sua experiência em Fernando de Noronha</p>
             <p>📧 atendimentotucanoronha@gmail.com | 📱 (81) 979097547</p>
             <p><a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tuca-noronha.vercel.app"}">${process.env.NEXT_PUBLIC_APP_URL ? new URL(process.env.NEXT_PUBLIC_APP_URL).hostname : "www.tuca-noronha.vercel.app"}</a></p>
         </div>
@@ -684,7 +684,7 @@ export const getPackageFlightsConfirmedTemplate = (data: any): string => {
         </div>
         
         <div class="footer">
-            <p>Tuca Noronha - Sua experiência em Fernando de Noronha</p>
+            <p>Viva Noronha - Sua experiência em Fernando de Noronha</p>
             <p>📧 atendimentotucanoronha@gmail.com | 📱 (81) 979097547</p>
             <p><a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tuca-noronha.vercel.app"}">${process.env.NEXT_PUBLIC_APP_URL ? new URL(process.env.NEXT_PUBLIC_APP_URL).hostname : "www.tuca-noronha.vercel.app"}</a></p>
         </div>
@@ -747,7 +747,7 @@ export const getPackageDocumentsReadyTemplate = (data: any): string => {
         </div>
         
         <div class="footer">
-            <p>Tuca Noronha - Sua experiência em Fernando de Noronha</p>
+            <p>Viva Noronha - Sua experiência em Fernando de Noronha</p>
             <p>📧 atendimentotucanoronha@gmail.com | 📱 (81) 979097547</p>
             <p><a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tuca-noronha.vercel.app"}">${process.env.NEXT_PUBLIC_APP_URL ? new URL(process.env.NEXT_PUBLIC_APP_URL).hostname : "www.tuca-noronha.vercel.app"}</a></p>
         </div>
@@ -799,15 +799,15 @@ export const getEmailTemplate = (data: EmailData): string => {
       return getBaseTemplate(`
         <div class="container">
             <div class="header">
-                <h1>Tuca Noronha</h1>
+                <h1>Viva Noronha</h1>
                 <p>Notificação importante</p>
             </div>
             <div class="content">
-                <p>Você recebeu uma notificação do Tuca Noronha.</p>
+                <p>Você recebeu uma notificação do Viva Noronha.</p>
                 <p>Entre em contato conosco se precisar de ajuda.</p>
             </div>
             <div class="footer">
-                <p>Tuca Noronha - Sua experiência em Fernando de Noronha</p>
+                <p>Viva Noronha - Sua experiência em Fernando de Noronha</p>
                 <p>📧 atendimentotucanoronha@gmail.com | 📱 (81) 979097547</p>
             </div>
         </div>

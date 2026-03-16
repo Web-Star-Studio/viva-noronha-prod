@@ -549,7 +549,7 @@ export const generatePDFContent = internalAction({
 <body>
     <div class="header">
         ${options.logoUrl ? `<img src="${options.logoUrl}" alt="Logo" class="logo">` : ''}
-        <div class="company-name">Tuca Noronha</div>
+        <div class="company-name">Viva Noronha</div>
         <div class="proposal-number">Proposta #${proposal.proposalNumber}</div>
     </div>
 

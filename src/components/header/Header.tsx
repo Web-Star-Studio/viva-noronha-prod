@@ -55,7 +55,7 @@ export default function Header() {
               className="text-2xl font-bold tracking-tighter"
             >
               <span className={`${isTransparent ? "text-white" : "text-gray-900"} ${playfairDisplay.className}`}>
-                Tuca Noronha
+                Viva Noronha
               </span>
             </Link>
 

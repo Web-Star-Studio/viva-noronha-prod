@@ -2,7 +2,7 @@
  * RBAC (Role-Based Access Control) Domain
  * 
  * This domain provides utilities for managing user roles and permissions
- * in the Tuca Noronha application.
+ * in the Viva Noronha application.
  */
 
 import { mutationWithRole as mutationRole } from "./mutation";

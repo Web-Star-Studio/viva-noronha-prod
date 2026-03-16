@@ -221,7 +221,7 @@ export const voucherEmailTemplate = (data: VoucherEmailData): string => {
         <a href="${process.env.NEXT_PUBLIC_APP_URL || "https://tuca-noronha.vercel.app"}/ajuda">Central de Ajuda</a>
       </p>
       <p style="margin-top: 20px; font-size: 12px;">
-        © ${new Date().getFullYear()} Tuca Noronha. Todos os direitos reservados.
+        © ${new Date().getFullYear()} Viva Noronha. Todos os direitos reservados.
       </p>
     </div>
   </div>

@@ -28,7 +28,7 @@ export const getEmailConfig = (): EmailConfig => {
         pass: process.env.SMTP_PASS!,
       },
       from: {
-        name: process.env.EMAIL_FROM_NAME || "Tuca Noronha",
+        name: process.env.EMAIL_FROM_NAME || "Viva Noronha",
         email: process.env.EMAIL_FROM || "noreply@tucanoronha.com",
       },
     };
@@ -46,7 +46,7 @@ export const getEmailConfig = (): EmailConfig => {
         pass: process.env.EMAIL_PASS || "ethereal.password",
       },
       from: {
-        name: "Tuca Noronha - Dev",
+        name: "Viva Noronha - Dev",
         email: process.env.EMAIL_FROM || "dev@tucanoronha.com",
       },
     };
@@ -63,7 +63,7 @@ export const getEmailConfig = (): EmailConfig => {
       pass: process.env.SMTP_PASS || "",
     },
     from: {
-      name: process.env.EMAIL_FROM_NAME || "Tuca Noronha",
+      name: process.env.EMAIL_FROM_NAME || "Viva Noronha",
       email: process.env.EMAIL_FROM || "noreply@tucanoronha.com",
     },
   };

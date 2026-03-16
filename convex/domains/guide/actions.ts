@@ -113,7 +113,7 @@ export const createGuidePurchasePreference = action({
         },
         auto_return: "approved",
         external_reference: `guide_${args.userId}`,
-        statement_descriptor: "TUCA NORONHA GUIA", // Appears on card statement
+        statement_descriptor: "VIVA NORONHA GUIA", // Appears on card statement
         notification_url: process.env.CONVEX_SITE_URL ? 
           `${process.env.CONVEX_SITE_URL}/mercadopago/guide-webhook` : 
           undefined,

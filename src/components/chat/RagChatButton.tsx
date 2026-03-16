@@ -76,7 +76,7 @@ export const RagChatButton: React.FC<RagChatButtonProps> = ({
     try {
       const result = await createThread({
         userId,
-        title: "Chat com Tuca Noronha"
+        title: "Chat com Viva Noronha"
       });
       setThreadId(result.threadId);
     } catch (error) {

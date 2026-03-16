@@ -59,13 +59,13 @@ export default function SobrePage() {
 
         <Separator className="my-16" />
 
-        {/* Tuca Noronha Section */}
+        {/* Viva Noronha Section */}
         <section className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
           <div className="flex justify-center">
             <div className="relative h-96 w-80">
               <Image
                 src="/images/tuca.jpg"
-                alt="Tuca Noronha"
+                alt="Viva Noronha"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-lg shadow-2xl"
@@ -76,10 +76,10 @@ export default function SobrePage() {
             <h3
               className={`${playfairDisplay.className} text-3xl font-bold text-gray-900 md:text-4xl`}
             >
-              Tuca Noronha: O Rosto por Trás do Sonho
+              Viva Noronha: O Rosto por Trás do Sonho
             </h3>
             <p className="mt-4 text-lg text-gray-600">
-              Tuca Noronha é a personificação da paixão por este paraíso. Com um
+              Viva Noronha é a personificação da paixão por este paraíso. Com um
               olhar de quem vive e respira a ilha, ele é a ponte entre você e a
               verdadeira essência de Noronha.
             </p>

@@ -31,7 +31,7 @@ bun run browser-tools-server # Start browser tools server
 
 ## Architecture Overview
 
-This is a **Tuca Noronha Tourism Platform** built with:
+This is a **Viva Noronha Tourism Platform** built with:
 - **Frontend**: Next.js 15 with App Router + React 19
 - **Backend**: Convex (database + serverless functions)  
 - **Authentication**: Clerk with custom role-based access control (RBAC)

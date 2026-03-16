@@ -1,9 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 import ActivitiesCard from "@/components/cards/ActivitiesCard";
 import EventCard from "@/components/cards/EventCard";
@@ -38,7 +37,6 @@ const cardVariants: Variants = {
 type SpotlightItemConfig = {
   key: string;
   title: string;
-  href: string;
   isLoading: boolean;
   hasData: boolean;
   content: ReactNode;
@@ -60,7 +58,6 @@ export default function HomeSpotlight() {
     {
       key: "activity",
       title: "Atividade em Destaque",
-      href: "/atividades",
       isLoading: loadingActivities,
       hasData: Boolean(activity),
       content: activity ? <ActivitiesCard activity={activity} /> : null,
@@ -69,7 +66,6 @@ export default function HomeSpotlight() {
     {
       key: "event",
       title: "Evento em Destaque",
-      href: "/eventos",
       isLoading: loadingEvents,
       hasData: Boolean(event),
       content: event ? <EventCard event={event} /> : null,
@@ -78,7 +74,6 @@ export default function HomeSpotlight() {
     {
       key: "restaurant",
       title: "Restaurante em Destaque",
-      href: "/restaurantes",
       isLoading: loadingRestaurants,
       hasData: Boolean(restaurant),
       content: restaurant ? <RestaurantCard restaurant={restaurant} /> : null,
@@ -87,7 +82,6 @@ export default function HomeSpotlight() {
     {
       key: "vehicle",
       title: "Veículo em Destaque",
-      href: "/veiculos",
       isLoading: loadingVehicles,
       hasData: Boolean(vehicle),
       content: vehicle ? <VehicleCard vehicle={vehicle} /> : null,
@@ -106,7 +100,7 @@ export default function HomeSpotlight() {
           className="text-center mb-16"
         >
           <p className="text-sm font-medium uppercase tracking-[0.35em] text-blue-500">
-            curadoria tuca noronha
+            curadoria viva noronha
           </p>
           <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-4xl">
             Destaques Selecionados Para Você
@@ -136,21 +130,9 @@ export default function HomeSpotlight() {
 
 type SpotlightTileProps = SpotlightItemConfig;
 
-function SpotlightTile({ title, href, isLoading, hasData, content, emptyMessage }: SpotlightTileProps) {
+function SpotlightTile({ title, isLoading, hasData, content, emptyMessage }: SpotlightTileProps) {
   return (
     <div className="flex h-full w-full flex-col">
-      <div className="mb-4 flex items-center justify-between gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-500">
-          {title}
-        </span>
-        <Link
-          href={href}
-          className="flex items-center gap-1 text-sm font-medium text-blue-600 transition hover:text-blue-700 hover:underline"
-        >
-          Ver tudo
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
       <div className="flex-1">
         {isLoading ? (
           <div className="flex h-full min-h-[320px] flex-col items-center justify-center rounded-2xl border border-gray-100 bg-white text-center shadow-sm">

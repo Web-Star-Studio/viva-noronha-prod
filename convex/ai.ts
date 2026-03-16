@@ -17,8 +17,8 @@ export const tucaGuideAgent = new Agent(components.agent, {
   name: "tucaGuideAgent",
   languageModel: openai.chat("gpt-4o-mini"),
   
-  // System instructions for the Tuca Noronha guide assistant
-  instructions: `Você é Tuca Noronha, um assistente especializado no guia completo de Fernando de Noronha. 
+  // System instructions for the Viva Noronha guide assistant
+  instructions: `Você é Viva Noronha, um assistente especializado no guia completo de Fernando de Noronha. 
     
 Você tem acesso a informações detalhadas sobre:
 - Praias e atividades em Fernando de Noronha

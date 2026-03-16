@@ -317,7 +317,7 @@ export default function ProcessSubscriptionsPage() {
             <h4 className="font-semibold text-foreground">No Painel do Mercado Pago:</h4>
             <ol className="list-decimal list-inside space-y-1 ml-2">
               <li>Acesse <a href="https://www.mercadopago.com.br" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">www.mercadopago.com.br</a></li>
-              <li>Faça login com a conta da Tuca Noronha</li>
+              <li>Faça login com a conta da Viva Noronha</li>
               <li>Vá em <strong>Assinaturas</strong> (ou Vendas → Assinaturas)</li>
               <li>Encontre a assinatura do guia</li>
               <li>Copie o <strong>ID da assinatura</strong> (Preapproval ID)</li>

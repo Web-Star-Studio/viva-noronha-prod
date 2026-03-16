@@ -287,7 +287,7 @@ export function generateStripeProductDescription(
   description?: string
 ): string {
   const baseDescription = description || `Reserva de ${assetName}`;
-  return `${baseDescription} - Tuca Noronha Platform`;
+  return `${baseDescription} - Viva Noronha Platform`;
 }
 
 /**

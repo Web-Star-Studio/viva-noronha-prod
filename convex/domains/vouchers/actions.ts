@@ -283,7 +283,7 @@ export const generateVoucherPDF = action({
         borderWidth: 1
       });
 
-      drawText('Tuca Noronha Tourism', margin + 15, yPosition - 20, {
+      drawText('Viva Noronha Tourism', margin + 15, yPosition - 20, {
         size: 11,
         font: helveticaBold,
         color: rgb(0.122, 0.161, 0.216)

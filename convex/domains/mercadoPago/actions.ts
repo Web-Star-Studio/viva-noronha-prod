@@ -106,7 +106,7 @@ export const createCheckoutPreference = internalAction({
           ],
           installments: 12, // Allow up to 12 installments (MP default for Brazil)
         },
-        statement_descriptor: "TUCA NORONHA",
+        statement_descriptor: "VIVA NORONHA",
       };
 
       if (payerEmail) {

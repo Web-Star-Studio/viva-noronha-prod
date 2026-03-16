@@ -31,12 +31,12 @@ export function useSystemSettings() {
     settings,
     isLoading: settings === undefined,
     whatsappNumber: settings?.whatsapp?.adminNumber || "+5581979097547",
-    businessName: settings?.whatsapp?.businessName || "Tuca Noronha Turismo",
+    businessName: settings?.whatsapp?.businessName || "Viva Noronha Turismo",
     supportEmail: settings?.support?.email || "atendimentotucanoronha@gmail.com",
     supportPhone: settings?.support?.phone || "+5581979097547",
-    companyName: settings?.business?.companyName || "Tuca Noronha Turismo",
+    companyName: settings?.business?.companyName || "Viva Noronha Turismo",
     primaryColor: settings?.ui?.primaryColor || "#0066CC",
-    footerText: settings?.ui?.footerText || "© 2025 Tuca Noronha Turismo. Todos os direitos reservados. Desenvolvido por Web Star Studio.",
+    footerText: settings?.ui?.footerText || "© 2025 Viva Noronha Turismo. Todos os direitos reservados. Desenvolvido por Web Star Studio.",
   };
 }
 

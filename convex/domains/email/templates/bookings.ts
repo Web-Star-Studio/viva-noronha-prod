@@ -51,7 +51,7 @@ function getBookingEmailTemplate(content: string): string {
                 <tr>
                   <td style="background-color: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e9ecef;">
                     <p style="margin: 0 0 10px 0; color: #6c757d; font-size: 14px;">
-                      Tuca Noronha Viagens
+                      Viva Noronha Viagens
                     </p>
                     <p style="margin: 0; color: #6c757d; font-size: 12px;">
                       Este é um email automático, por favor não responda.

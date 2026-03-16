@@ -56,7 +56,7 @@ export default function ContatoPage() {
       <section className="relative h-[50vh] min-h-[350px] w-full">
         <Image
           src="/images/transfer-hero-guide.png"
-          alt="Contato com Tuca Noronha"
+          alt="Contato com Viva Noronha"
           layout="fill"
           objectFit="cover"
           className="brightness-50"

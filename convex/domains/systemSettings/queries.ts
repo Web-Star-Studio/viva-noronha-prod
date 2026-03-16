@@ -106,14 +106,14 @@ export const getPublicSettings = query({
     const result = {
       whatsapp: {
         adminNumber: "+5581979097547",
-        businessName: "Tuca Noronha Turismo",
+        businessName: "Viva Noronha Turismo",
       },
       support: {
         email: "atendimentotucanoronha@gmail.com",
         phone: "+5581979097547",
       },
       business: {
-        companyName: "Tuca Noronha Turismo",
+        companyName: "Viva Noronha Turismo",
         address: {
           street: "Rua das Flores",
           city: "Fernando de Noronha",
@@ -123,7 +123,7 @@ export const getPublicSettings = query({
       },
       ui: {
         primaryColor: "#0066CC",
-        footerText: "© 2025 Tuca Noronha Turismo. Todos os direitos reservados. Desenvolvido por Web Star Studio.",
+        footerText: "© 2025 Viva Noronha Turismo. Todos os direitos reservados. Desenvolvido por Web Star Studio.",
       },
     };
 

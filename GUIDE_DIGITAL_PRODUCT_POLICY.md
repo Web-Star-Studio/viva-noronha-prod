@@ -135,7 +135,7 @@ Estamos à disposição para auxiliar com qualquer dificuldade técnica
 de acesso ao conteúdo.
 
 Atenciosamente,
-Equipe Tuca Noronha
+Equipe Viva Noronha
 ```
 
 ### Reembolso PODE ser concedido se:

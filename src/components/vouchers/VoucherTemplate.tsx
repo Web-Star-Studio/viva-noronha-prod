@@ -82,7 +82,7 @@ export function VoucherTemplate({ voucherData, assetType }: VoucherTemplateProps
           <div className="ml-auto flex flex-col items-end">
             <Image 
               src={voucherData.brandInfo.logoUrl || "/images/tuca-logo.jpeg"} 
-              alt="Tuca Noronha Logo" 
+              alt="Viva Noronha Logo" 
               width={120} 
               height={120} 
               className="h-24 w-auto object-contain" 
@@ -335,7 +335,7 @@ export function VoucherTemplate({ voucherData, assetType }: VoucherTemplateProps
       {/* Footer */}
       <div className="mt-8 pt-6 border-t-2 border-gray-200 text-center text-sm text-gray-600">
         <p>Este voucher é válido apenas para a data e horário especificados.</p>
-        <p>Em caso de dúvidas, entre em contato com a agência Tuca Noronha.</p>
+        <p>Em caso de dúvidas, entre em contato com a agência Viva Noronha.</p>
       </div>
     </div>
   );

@@ -156,7 +156,7 @@ export function VoucherViewer({ voucherId, confirmationCode, voucherNumber }: Vo
     } : undefined,
     brandInfo: {
       logoUrl: voucher.partner?.image,
-      companyName: "Tuca Noronha",
+      companyName: "Viva Noronha",
       website: "https://tucanoronha.com",
       supportEmail: "atendimentotucanoronha@gmail.com",
       supportPhone: "",

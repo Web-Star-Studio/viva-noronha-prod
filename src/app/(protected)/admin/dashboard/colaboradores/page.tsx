@@ -5,6 +5,6 @@ export default function ColaboradoresPage() {
 }
 
 export const metadata = {
-  title: "Colaboradores | Tuca Noronha",
+  title: "Colaboradores | Viva Noronha",
   description: "Gerencie os colaboradores da sua empresa",
 }; 

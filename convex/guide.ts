@@ -77,7 +77,7 @@ export const createThread = action({
   handler: async (ctx, args) => {
     const { threadId } = await tucaGuideAgent.createThread(ctx, {
       userId: args.userId,
-      title: args.title || "Chat com Tuca Noronha",
+      title: args.title || "Chat com Viva Noronha",
     });
     return { threadId, success: true };
   },
@@ -104,7 +104,7 @@ export const askGuideWithThread = action({
       const { generateText } = await import("ai");
       const result = await generateText({
         model: openai("gpt-4o-mini"),
-        system: `Você é Tuca Noronha, um assistente especializado no guia completo de Fernando de Noronha. 
+        system: `Você é Viva Noronha, um assistente especializado no guia completo de Fernando de Noronha. 
         
 Você tem acesso a informações detalhadas sobre:
 - Praias e atividades em Fernando de Noronha

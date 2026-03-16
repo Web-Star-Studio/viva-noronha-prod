@@ -105,7 +105,7 @@ export function ChatTab({ requestId, requestDetails, requestMessages }: ChatTabP
                                    message.senderEmail?.includes("tucanoronha") ||
                                    (requestDetails && message.senderEmail !== requestDetails.customerInfo.email);
               
-              const senderName = isAdminMessage ? "Equipe Tuca Noronha" : (message.senderName || "Cliente");
+              const senderName = isAdminMessage ? "Equipe Viva Noronha" : (message.senderName || "Cliente");
 
               return (
                 <div 

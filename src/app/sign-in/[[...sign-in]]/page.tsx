@@ -64,7 +64,7 @@ export default function SignInPage() {
                           transition={{ delay: 0.2, duration: 0.4 }}
                         >
                           <CardTitle className={`text-3xl font-bold text-center ${playfairDisplay.className}`}>
-                            Tuca Noronha
+                            Viva Noronha
                           </CardTitle>
                         </motion.div>
                         <motion.div

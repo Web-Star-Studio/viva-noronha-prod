@@ -16,7 +16,7 @@ export default function PoliticaDePrivacidadePage() {
 
         <div className="prose prose-lg mx-auto max-w-full text-gray-700">
           <p>
-            A sua privacidade é importante para nós. É política do Tuca Noronha respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site Tuca Noronha, e outros sites que possuímos e operamos.
+            A sua privacidade é importante para nós. É política do Viva Noronha respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site Viva Noronha, e outros sites que possuímos e operamos.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-800">1. Informações que Coletamos</h2>

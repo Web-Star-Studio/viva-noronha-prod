@@ -152,7 +152,7 @@ export function ConfirmacaoReserva({
         <div className="text-right">
           <Image 
             src="/images/tuca-logo.jpeg" 
-            alt="Tuca Noronha" 
+            alt="Viva Noronha" 
             width={120} 
             height={60}
             className="mb-2"
@@ -506,7 +506,7 @@ export function ConfirmacaoReserva({
         {/* Contact */}
         <div className="mt-8 pt-6 border-t">
           <h4 className="text-lg font-bold mb-3">Atenciosamente</h4>
-          <p className="font-semibold">Equipe Tuca Noronha</p>
+          <p className="font-semibold">Equipe Viva Noronha</p>
           <p className="text-sm text-gray-600">✉️ atendimentotucanoronha@gmail.com</p>
         </div>
       </div>

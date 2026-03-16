@@ -112,7 +112,7 @@ export const createPaymentPreferenceWithUpdate = action({
       const preferenceData = {
         items: args.items,
         payer: args.payer,
-        statement_descriptor: args.statement_descriptor || "TUCA NORONHA",
+        statement_descriptor: args.statement_descriptor || "VIVA NORONHA",
         back_urls: backUrls,
         auto_return: "approved",
         external_reference: args.external_reference || args.proposalId,
@@ -261,7 +261,7 @@ export const createMPPreference = action({
       const preferenceData = {
         items: args.items,
         payer: args.payer,
-        statement_descriptor: args.statement_descriptor || "TUCA NORONHA",
+        statement_descriptor: args.statement_descriptor || "VIVA NORONHA",
         back_urls: backUrls,
         auto_return: "approved",
         external_reference: args.external_reference || args.proposalId,
