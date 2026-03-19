@@ -1,0 +1,8 @@
+onlyBuiltDependencies:
+  - '@clerk/shared'
+  - '@sentry/cli'
+  - core-js
+  - esbuild
+  - msgpackr-extract
+  - sharp
+  - unrs-resolver

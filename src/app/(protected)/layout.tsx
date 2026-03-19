@@ -30,16 +30,22 @@ export default function ProtectedLayout({
 
     // Skip check if still loading
     if (isLoading) return;
-    
+
     // If not authenticated, redirect to sign-in
     if (!isAuthenticated) {
       router.push("/sign-in");
       return;
     }
-    
-    // If authenticated but user data still loading, wait
+
+    // If authenticated but no user record in Convex, redirect to onboarding
+    if (user === null) {
+      router.push("/onboarding");
+      return;
+    }
+
+    // If user data still loading, wait
     if (!user) return;
-    
+
     // Check if user has valid role
     const userRole = user.role || "traveler";
     if (!ALLOWED_ROLES.includes(userRole)) {
@@ -47,7 +53,7 @@ export default function ProtectedLayout({
       toast.error("Papel de usuário não reconhecido.", {
         description: "Entre em contato com o suporte se o problema persistir.",
       });
-      
+
       // Instead of redirecting, show access denied message in place
       setAccessDenied(true);
     } else {
@@ -55,8 +61,8 @@ export default function ProtectedLayout({
     }
   }, [isLoading, isAuthenticated, user, router, pathname]);
 
-  // Show nothing while checking permissions
-  if (isLoading || !user) {
+  // Show loading while checking permissions
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-slate-50">
         <div className="animate-pulse text-slate-400">Verificando permissões...</div>

@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { useUser } from "@clerk/nextjs"
-import { useQuery } from "convex/react"
+import { useConvexAuth, useQuery } from "convex/react"
 import { api } from "../../../convex/_generated/api"
 
 interface OnboardingRedirectProps {
@@ -18,10 +18,11 @@ export function OnboardingRedirect({
   const router = useRouter()
   const pathname = usePathname()
   const { isLoaded, isSignedIn } = useUser()
-  
+  const { isAuthenticated: isConvexAuthenticated } = useConvexAuth()
+
   const shouldRedirect = useQuery(
     api.domains.users.queries.shouldRedirectToOnboarding,
-    isSignedIn ? undefined : undefined
+    isConvexAuthenticated ? undefined : "skip"
   )
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export function OnboardingRedirect({
   }, [isLoaded, isSignedIn, shouldRedirect, pathname, router, excludePaths])
 
   // Mostrar loading enquanto verifica
-  if (!isLoaded || (isSignedIn && shouldRedirect === undefined)) {
+  if (!isLoaded || (isSignedIn && isConvexAuthenticated && shouldRedirect === undefined)) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>

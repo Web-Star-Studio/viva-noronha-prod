@@ -117,9 +117,9 @@ export default function HomeSpotlight() {
           viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4"
         >
-          {items.map((item) => (
-            <motion.div key={item.key} variants={cardVariants} className="flex h-full">
-              <SpotlightTile {...item} />
+          {items.map(({ key, ...rest }) => (
+            <motion.div key={key} variants={cardVariants} className="flex h-full">
+              <SpotlightTile {...rest} />
             </motion.div>
           ))}
         </motion.div>

@@ -5,12 +5,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
   trailingSlash: true,
   // Timeout de geração de páginas estáticas (em segundos)
   staticPageGenerationTimeout: 1000,
+  turbopack: {},
   images: {
     remotePatterns: [
       {

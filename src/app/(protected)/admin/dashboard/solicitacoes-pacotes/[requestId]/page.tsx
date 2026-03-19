@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { PackageRequestDetailsPageClient } from "@/components/dashboard/package-request-details/PackageRequestDetailsPageClient";
 
 interface PackageRequestDetailsPageProps {
-  params: {
+  params: Promise<{
     requestId: string;
-  };
+  }>;
 }
 
 export const metadata: Metadata = {
@@ -12,7 +12,8 @@ export const metadata: Metadata = {
   description: "Visualize e gerencie uma solicitação de pacote personalizada.",
 };
 
-export default function PackageRequestDetailsPage({ params }: PackageRequestDetailsPageProps) {
-  return <PackageRequestDetailsPageClient requestId={params.requestId} />;
+export default async function PackageRequestDetailsPage({ params }: PackageRequestDetailsPageProps) {
+  const { requestId } = await params;
+  return <PackageRequestDetailsPageClient requestId={requestId} />;
 }
 

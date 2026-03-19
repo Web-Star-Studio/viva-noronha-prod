@@ -1,11 +1,15 @@
 import { useAuth } from "@clerk/nextjs";
-import { useQuery } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 export function useCurrentUser() {
   const { isSignedIn } = useAuth();
-  const user = useQuery(api.domains.rbac.queries.getCurrentUser);
-  
+  const { isAuthenticated: isConvexAuthenticated } = useConvexAuth();
+  const user = useQuery(
+    api.domains.rbac.queries.getCurrentUser,
+    isConvexAuthenticated ? undefined : "skip"
+  );
+
   // Helper function to check if user can manage other users
   const canManageUsers = () => {
     return user?.role === "master";
@@ -33,7 +37,7 @@ export function useCurrentUser() {
 
   return {
     user,
-    isLoading: user === undefined,
+    isLoading: !isConvexAuthenticated || user === undefined,
     isAuthenticated: isSignedIn,
     canManageUsers,
     canManageEmployees,

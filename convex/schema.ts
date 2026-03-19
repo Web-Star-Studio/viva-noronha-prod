@@ -1045,9 +1045,11 @@ export default defineSchema({
       createdAt: v.number(),
       updatedAt: v.number(),
     })),
+    isFeatured: v.optional(v.boolean()),
   })
     .index("by_status", ["status"])
-    .index("by_ownerId", ["ownerId"]),
+    .index("by_ownerId", ["ownerId"])
+    .index("featured_vehicles", ["isFeatured", "status"]),
   
   vehicleBookings: defineTable({
     vehicleId: v.id("vehicles"),
