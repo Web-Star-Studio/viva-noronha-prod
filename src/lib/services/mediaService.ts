@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
-import { useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 import { uploadFiles } from "@/lib/uploadthing";
 
@@ -34,12 +34,7 @@ export type MediaUpload = {
 // Hook to get all media files with URL verification
 export function useMedia() {
   const media = useQuery(api.domains.media.queries.getAllMedia);
-  const verifyMediaUrls = useVerifyMediaUrls();
-  
-  // Verificar e atualizar URLs quando os dados forem carregados
-  if (media) {
-    verifyMediaUrls(media);
-  }
+  useVerifyMediaCollection(media);
 
   return {
     media,
@@ -53,12 +48,7 @@ export function useMediaByCategory(category: string | null) {
     api.domains.media.queries.getMediaByCategory,
     category ? { category } : "skip"
   );
-  const verifyMediaUrls = useVerifyMediaUrls();
-  
-  // Verificar e atualizar URLs quando os dados forem carregados
-  if (media) {
-    verifyMediaUrls(media);
-  }
+  useVerifyMediaCollection(media);
   
   return {
     media,
@@ -69,12 +59,7 @@ export function useMediaByCategory(category: string | null) {
 // Hook to get media by user
 export function useMediaByUser(userId: Id<"users">) {
   const media = useQuery(api.domains.media.queries.getByUser, { userId });
-  const verifyMediaUrls = useVerifyMediaUrls();
-  
-  // Verificar e atualizar URLs quando os dados forem carregados
-  if (media) {
-    verifyMediaUrls(media);
-  }
+  useVerifyMediaCollection(media);
   
   return {
     media: media as Media[] | undefined,
@@ -85,12 +70,7 @@ export function useMediaByUser(userId: Id<"users">) {
 // Hook to get a single media file by ID
 export function useMediaById(id: Id<"media"> | null) {
   const media = useQuery(api.domains.media.queries.getMediaById, id ? { id } : "skip");
-  const verifyMediaUrls = useVerifyMediaUrls();
-  
-  // Verificar e atualizar URLs quando os dados forem carregados
-  if (media) {
-    verifyMediaUrls([media]);
-  }
+  useVerifyMediaCollection(media ? [media] : undefined);
   
   return {
     media,
@@ -98,102 +78,148 @@ export function useMediaById(id: Id<"media"> | null) {
   };
 }
 
-// Hook to verify and refresh Convex media URLs
-export function useVerifyMediaUrls() {
+function useVerifyMediaCollection(mediaItems?: Media[] | null) {
   const refreshUrl = useMutation(api.domains.media.mutations.refreshMediaUrl);
-  
-  return async (mediaItems: Media[]) => {
-    // Processa vários itens de mídia
-    for (const media of mediaItems) {
-      if (!media._id) continue;
-      
-      // Verifica se a URL está disponível fazendo um HEAD request
-      try {
-        const response = await fetch(media.url, { method: 'HEAD' });
-        
-        // Se a URL não for válida (erro 4xx ou 5xx), atualiza a URL
-        if (!response.ok) {
-          console.log(`Atualizando URL para mídia ${media._id} (${media.fileName})`);
-          const newUrl = await refreshUrl({ id: media._id });
-          if (newUrl === null) {
-            console.log(`Mídia ${media._id} foi excluída, ignorando atualização de URL`);
-          }
+  const verifiedIdsRef = useRef<Set<string>>(new Set());
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    const verifiedIds = verifiedIdsRef.current;
+
+    if (!mediaItems || mediaItems.length === 0) {
+      verifiedIds.clear();
+      return;
+    }
+
+    const pendingItems = mediaItems.filter((media) => {
+      if (!media?._id) {
+        return false;
+      }
+
+      const mediaId = String(media._id);
+      if (verifiedIds.has(mediaId)) {
+        return false;
+      }
+
+      verifiedIds.add(mediaId);
+      return true;
+    });
+
+    if (pendingItems.length === 0) {
+      return;
+    }
+
+    void (async () => {
+      for (const media of pendingItems) {
+        if (abortController.signal.aborted) {
+          return;
         }
-      } catch (error) {
-        // Em caso de erro de rede, também atualiza a URL
-        console.log(`Erro ao verificar URL para mídia ${media._id}, atualizando...`, error);
+
+        if (!media._id) {
+          continue;
+        }
+
         try {
-          const newUrl = await refreshUrl({ id: media._id });
-          if (newUrl === null) {
-            console.log(`Mídia ${media._id} foi excluída, ignorando atualização de URL`);
+          const response = await fetch(media.url, {
+            method: "HEAD",
+            signal: abortController.signal,
+          });
+
+          if (abortController.signal.aborted) {
+            return;
           }
-        } catch (refreshError) {
-          console.log(`Erro ao atualizar URL para mídia ${media._id}:`, refreshError);
+
+          if (!response.ok) {
+            console.log(`Atualizando URL para mídia ${media._id} (${media.fileName})`);
+            const newUrl = await refreshUrl({ id: media._id });
+            if (abortController.signal.aborted) {
+              return;
+            }
+            if (newUrl === null) {
+              verifiedIds.delete(String(media._id));
+              console.log(`Mídia ${media._id} foi excluída, ignorando atualização de URL`);
+            }
+          }
+        } catch (error) {
+          if (abortController.signal.aborted) {
+            return;
+          }
+
+          console.log(`Erro ao verificar URL para mídia ${media._id}, atualizando...`, error);
+          try {
+            const newUrl = await refreshUrl({ id: media._id });
+            if (abortController.signal.aborted) {
+              return;
+            }
+            if (newUrl === null) {
+              verifiedIds.delete(String(media._id));
+              console.log(`Mídia ${media._id} foi excluída, ignorando atualização de URL`);
+            }
+          } catch (refreshError) {
+            console.log(`Erro ao atualizar URL para mídia ${media._id}:`, refreshError);
+          }
         }
       }
-    }
-  };
+    })();
+
+    return () => {
+      abortController.abort();
+      verifiedIds.clear();
+    };
+  }, [mediaItems, refreshUrl]);
 }
 
 // Hook to upload a media file
 export function useUploadMedia() {
   const { user } = useCurrentUser();
   const storeMedia = useMutation(api.domains.media.mutations.createMedia);
-  
-  const uploadMedia = useCallback(
-    async ({
-      file,
+
+  return async ({
+    file,
+    description,
+    category,
+    isPublic,
+    tags,
+  }: {
+    file: File;
+    description?: string;
+    category?: string;
+    isPublic?: boolean;
+    tags?: string[];
+  }) => {
+    if (!user?._id) {
+      throw new Error("Usuário não autenticado");
+    }
+
+    const uploadResponse = await uploadFiles("mediaUploader", {
+      files: [file],
+    });
+
+    const uploadedFile = uploadResponse?.[0];
+    if (!uploadedFile) {
+      throw new Error("Falha ao fazer upload do arquivo");
+    }
+
+    const fileUrl =
+      uploadedFile.serverData?.fileUrl ?? uploadedFile.ufsUrl ?? uploadedFile.url;
+    const fileKey = uploadedFile.serverData?.fileKey ?? uploadedFile.key;
+    const fileNameFromServer = uploadedFile.serverData?.fileName ?? uploadedFile.name;
+    const fileTypeFromServer = uploadedFile.serverData?.fileType ?? uploadedFile.type;
+    const fileSizeFromServer = uploadedFile.serverData?.fileSize ?? uploadedFile.size;
+
+    return await storeMedia({
+      storageId: fileKey,
+      fileName: fileNameFromServer ?? file.name,
+      fileType: fileTypeFromServer ?? file.type,
+      fileSize: BigInt(fileSizeFromServer ?? file.size),
       description,
       category,
-      isPublic,
+      uploadedBy: user._id,
+      isPublic: isPublic ?? true,
       tags,
-    }: {
-      file: File;
-      description?: string;
-      category?: string;
-      isPublic?: boolean;
-      tags?: string[];
-    }) => {
-      if (!user?._id) {
-        throw new Error("Usuário não autenticado");
-      }
-
-      const uploadResponse = await uploadFiles("mediaUploader", {
-        files: [file],
-      });
-
-      const uploadedFile = uploadResponse?.[0];
-      if (!uploadedFile) {
-        throw new Error("Falha ao fazer upload do arquivo");
-      }
-
-      const fileUrl =
-        uploadedFile.serverData?.fileUrl ?? uploadedFile.ufsUrl ?? uploadedFile.url;
-      const fileKey = uploadedFile.serverData?.fileKey ?? uploadedFile.key;
-      const fileNameFromServer = uploadedFile.serverData?.fileName ?? uploadedFile.name;
-      const fileTypeFromServer = uploadedFile.serverData?.fileType ?? uploadedFile.type;
-      const fileSizeFromServer = uploadedFile.serverData?.fileSize ?? uploadedFile.size;
-
-      // Armazenar os metadados no banco de dados
-      const mediaId = await storeMedia({
-        storageId: fileKey,
-        fileName: fileNameFromServer ?? file.name,
-        fileType: fileTypeFromServer ?? file.type,
-        fileSize: BigInt(fileSizeFromServer ?? file.size),
-        description,
-        category,
-        uploadedBy: user._id,
-        isPublic: isPublic ?? true,
-        tags,
-        fileUrl,
-      });
-
-      return mediaId;
-    },
-    [storeMedia, user?._id]
-  );
-
-  return uploadMedia;
+      fileUrl,
+    });
+  };
 }
 
 // Hook to get Convex user ID from Clerk ID
@@ -218,47 +244,37 @@ export function useGetConvexUserId() {
 // Hook to delete a media file
 export function useDeleteMedia() {
   const deleteMedia = useMutation(api.domains.media.mutations.deleteMedia);
-  
-  const deleteMediaFn = useCallback(
-    async (id: Id<"media">) => {
-      return await deleteMedia({ id });
-    },
-    [deleteMedia]
-  );
 
-  return deleteMediaFn;
+  return async (id: Id<"media">) => {
+    return await deleteMedia({ id });
+  };
 }
 
 // Hook to update media metadata
 export function useUpdateMedia() {
   const updateMedia = useMutation(api.domains.media.mutations.updateMedia);
-  
-  const updateMediaFn = useCallback(
-    async ({
+
+  return async ({
+    id,
+    description,
+    category,
+    isPublic,
+    tags,
+  }: {
+    id: Id<"media">;
+    description?: string;
+    category?: string;
+    isPublic?: boolean;
+    tags?: string[];
+  }) => {
+    return await updateMedia({
       id,
       description,
       category,
       isPublic,
       tags,
-    }: {
-      id: Id<"media">;
-      description?: string;
-      category?: string;
-      isPublic?: boolean;
-      tags?: string[];
-    }) => {
-      return await updateMedia({
-        id,
-        description,
-        category,
-        isPublic,
-        tags,
-      });
-    },
-    [updateMedia]
-  );
-
-  return updateMediaFn;
+    });
+  };
 }
 
 // Hook to get media URL

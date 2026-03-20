@@ -3,7 +3,7 @@ import { withSentryConfig } from "@sentry/nextjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    ignoreBuildErrors: true,
+    tsconfigPath: "./tsconfig.typecheck.json",
   },
   trailingSlash: true,
   // Timeout de geração de páginas estáticas (em segundos)

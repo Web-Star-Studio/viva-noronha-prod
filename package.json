@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
     "test:openai": "node scripts/test-openai.js",
     "test:integration": "node scripts/test-convex-integration.js",
     "test:email": "node scripts/test-email.js",

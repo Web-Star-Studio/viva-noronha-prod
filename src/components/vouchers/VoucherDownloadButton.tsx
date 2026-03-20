@@ -77,7 +77,7 @@ export function VoucherDownloadButton({
       } else {
         throw new Error("Não foi possível gerar o PDF");
       }
-    } catch {
+    } catch (error) {
       console.error("Error downloading PDF:", error);
       toast.error("Erro ao baixar PDF. Tente novamente.", { id: "pdf-generation" });
     } finally {
