@@ -4,7 +4,10 @@ import { api } from "../../../convex/_generated/api";
 
 export function useCurrentUser() {
   const { isSignedIn } = useAuth();
-  const { isAuthenticated: isConvexAuthenticated } = useConvexAuth();
+  const {
+    isAuthenticated: isConvexAuthenticated,
+    isLoading: isConvexLoading,
+  } = useConvexAuth();
   const user = useQuery(
     api.domains.rbac.queries.getCurrentUser,
     isConvexAuthenticated ? undefined : "skip"
@@ -37,8 +40,9 @@ export function useCurrentUser() {
 
   return {
     user,
-    isLoading: !isConvexAuthenticated || user === undefined,
-    isAuthenticated: isSignedIn,
+    isLoading:
+      isConvexLoading || Boolean(isSignedIn && isConvexAuthenticated && user === undefined),
+    isAuthenticated: Boolean(isSignedIn),
     canManageUsers,
     canManageEmployees,
     canManageOrganizations,

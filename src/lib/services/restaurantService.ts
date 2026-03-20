@@ -56,6 +56,7 @@ export type Restaurant = {
   };
   adminRating?: number; // Classificação definida pelo admin (0-5)
   acceptsReservations: boolean;
+  maximumPartySize?: number;
   tags: string[];
   executiveChef?: string;
   privatePartyInfo?: string;

@@ -1,0 +1,38 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "next-env.d.ts",
+    "next.config.mjs",
+    "src/types/convex-generated-shim.d.ts",
+    "src/app/layout.tsx",
+    "src/app/loading.tsx",
+    "src/app/not-found.tsx",
+    "src/app/page.tsx",
+    "src/app/providers.tsx",
+    "src/app/booking/success/**/*",
+    "src/app/payment/processing/**/*",
+    "src/app/pagamento/sucesso/**/*",
+    "src/app/atividades/[id]/**/*",
+    "src/app/restaurantes/[slug]/**/*",
+    "src/app/veiculos/[id]/**/*",
+    "src/app/pacotes/[slug]/**/*",
+    "src/app/(protected)/layout.tsx",
+    "src/app/(protected)/loading.tsx",
+    "src/app/(protected)/admin/layout.tsx",
+    "src/app/(protected)/meu-painel/guia/sucesso/**/*",
+    "src/components/auth/**/*",
+    "src/components/vouchers/VoucherDownloadButton.tsx",
+    "src/hooks/useCurrentUser.ts",
+    "src/lib/auth.tsx",
+    "src/lib/hooks/useCurrentUser.ts",
+    "src/lib/providers/QueryProvider.tsx",
+    "src/lib/services/mediaService.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "convex/**/*",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/tests/**/*"
+  ]
+}
