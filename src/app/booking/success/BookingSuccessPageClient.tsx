@@ -134,7 +134,6 @@ export default function BookingSuccessPageClient({
   const isPaid = status === "succeeded" || status === "approved";
   const isProcessing =
     status === "processing" || status === "pending" || status === "in_process";
-  const isPendingLike = isProcessing;
   const voucherBookingType = isVoucherBookingType(bookingData?.assetType ?? "")
     ? bookingData.assetType
     : null;
@@ -338,8 +337,8 @@ export default function BookingSuccessPageClient({
               {/* Payment Summary */}
               <div className="border-t pt-4">
                 <div className="flex justify-between items-center text-lg font-semibold">
-                  <span>Total {isPendingLike ? 'a Pagar' : 'Pago'}</span>
-                  <span className={isPendingLike ? 'text-orange-600' : 'text-green-600'}>
+                  <span>Total {isProcessing ? 'a Pagar' : 'Pago'}</span>
+                  <span className={isProcessing ? 'text-orange-600' : 'text-green-600'}>
                     {formatCurrency(bookingData.totalPrice ?? bookingData.totalAmount ?? 0)}
                   </span>
                 </div>
@@ -419,7 +418,7 @@ export default function BookingSuccessPageClient({
                 <p>• <strong>Seu voucher está disponível acima</strong> - apresente no local do serviço</p>
               )}
               <p>• O parceiro pode entrar em contato para confirmar detalhes</p>
-                              <p>• Você pode acompanhar o status na seção &quot;Minhas Reservas&quot;</p>
+              <p>• Você pode acompanhar o status na seção &quot;Minhas Reservas&quot;</p>
               <p>• Em caso de dúvidas, entre em contato conosco</p>
             </div>
           </CardContent>

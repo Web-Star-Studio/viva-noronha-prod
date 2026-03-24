@@ -212,7 +212,24 @@ export default function PackageDetailPageClient({ slug }: { slug: string }) {
             >
               <span>Comparar</span>
             </Button>
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2"
+              onClick={async () => {
+                const url = window.location.href;
+                if (navigator.share) {
+                  try {
+                    await navigator.share({ title: packageData.name, url });
+                  } catch {
+                    // User cancelled or share failed — ignore
+                  }
+                } else {
+                  await navigator.clipboard.writeText(url);
+                  toast.success("Link copiado!");
+                }
+              }}
+            >
               <Share2 className="h-4 w-4" />
               Compartilhar
             </Button>

@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 import { uploadFiles } from "@/lib/uploadthing";
 
@@ -70,7 +70,8 @@ export function useMediaByUser(userId: Id<"users">) {
 // Hook to get a single media file by ID
 export function useMediaById(id: Id<"media"> | null) {
   const media = useQuery(api.domains.media.queries.getMediaById, id ? { id } : "skip");
-  useVerifyMediaCollection(media ? [media] : undefined);
+  const mediaList = useMemo(() => (media ? [media] : undefined), [media]);
+  useVerifyMediaCollection(mediaList);
   
   return {
     media,
@@ -87,7 +88,6 @@ function useVerifyMediaCollection(mediaItems?: Media[] | null) {
     const verifiedIds = verifiedIdsRef.current;
 
     if (!mediaItems || mediaItems.length === 0) {
-      verifiedIds.clear();
       return;
     }
 
@@ -96,12 +96,12 @@ function useVerifyMediaCollection(mediaItems?: Media[] | null) {
         return false;
       }
 
-      const mediaId = String(media._id);
-      if (verifiedIds.has(mediaId)) {
+      const mediaKey = `${String(media._id)}:${media.url}`;
+      if (verifiedIds.has(mediaKey)) {
         return false;
       }
 
-      verifiedIds.add(mediaId);
+      verifiedIds.add(mediaKey);
       return true;
     });
 
@@ -136,7 +136,7 @@ function useVerifyMediaCollection(mediaItems?: Media[] | null) {
               return;
             }
             if (newUrl === null) {
-              verifiedIds.delete(String(media._id));
+              verifiedIds.delete(`${String(media._id)}:${media.url}`);
               console.log(`Mídia ${media._id} foi excluída, ignorando atualização de URL`);
             }
           }
@@ -152,7 +152,7 @@ function useVerifyMediaCollection(mediaItems?: Media[] | null) {
               return;
             }
             if (newUrl === null) {
-              verifiedIds.delete(String(media._id));
+              verifiedIds.delete(`${String(media._id)}:${media.url}`);
               console.log(`Mídia ${media._id} foi excluída, ignorando atualização de URL`);
             }
           } catch (refreshError) {
@@ -164,7 +164,6 @@ function useVerifyMediaCollection(mediaItems?: Media[] | null) {
 
     return () => {
       abortController.abort();
-      verifiedIds.clear();
     };
   }, [mediaItems, refreshUrl]);
 }

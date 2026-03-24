@@ -17,7 +17,7 @@ export type OperatingDays = {
 // Tipos para representar um restaurante
 export type Restaurant = {
   id?: string;
-  _id?: Id<"restaurants">;
+  _id: Id<"restaurants">;
   _creationTime?: number;
   name: string;
   slug: string;

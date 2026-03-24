@@ -37,8 +37,13 @@ export function useIsAuthenticated(): {
  * @deprecated Use useAuth from '@/lib/auth' instead.
  */
 export function useRequireAuth(redirectUrl?: string) {
-  console.warn("useRequireAuth is deprecated. Use useAuth from @/lib/auth instead.");
   const { isAuthenticated, isLoading } = useIsAuthenticated();
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("useRequireAuth is deprecated. Use useAuth from @/lib/auth instead.");
+    }
+  }, []);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated && redirectUrl) {

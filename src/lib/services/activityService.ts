@@ -499,11 +499,11 @@ export const useCreateActivityTicket = () => {
   
   return async (ticketData: Omit<ActivityTicket, 'id' | 'createdAt'>) => {
     // Convert number fields to bigint for Convex
-    const convexData = {
+    const convexData: Parameters<typeof createTicketMutation>[0] = {
       ...ticketData,
       availableQuantity: ticketData.availableQuantity,
       maxPerOrder: ticketData.maxPerOrder,
-    } as Parameters<typeof createTicketMutation>[0];
+    };
     
     try {
       const ticketId = await createTicketMutation(convexData);
@@ -522,10 +522,10 @@ export const useUpdateActivityTicket = () => {
     const { id, createdAt: _createdAt, ...updateData } = ticketData;
     void _createdAt; // Avoid unused variable warning
 
-    const mutationInput = {
+    const mutationInput: Parameters<typeof updateTicketMutation>[0] = {
       id: id as Id<"activityTickets">,
       ...updateData,
-    } as Parameters<typeof updateTicketMutation>[0];
+    };
     
     return await updateTicketMutation(mutationInput);
   };

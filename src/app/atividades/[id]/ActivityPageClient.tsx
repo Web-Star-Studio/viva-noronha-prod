@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Clock, Users, ArrowLeft, Info, Star, AlertTriangle, CheckCircle, XCircle, Gauge,  } from "lucide-react";
+import { Clock, Users, ArrowLeft, Info, Star, AlertTriangle, CheckCircle, XCircle, Gauge, LogIn } from "lucide-react";
 import { usePublicActivity } from "@/lib/services/activityService";
 import { useConvexAuth } from "convex/react";
+import { useRouter } from "next/navigation";
 import { cn, formatCurrency } from "@/lib/utils";
 import { ActivityBookingForm } from "@/components/bookings";
 import { parseMediaEntry } from "@/lib/media";
@@ -26,7 +27,7 @@ import { HelpSection } from "@/components/contact/HelpSection";
 
 export default function ActivityPageClient({ activityId }: { activityId: string }) {
   const { isAuthenticated } = useConvexAuth();
-  // Share modal removido
+  const router = useRouter();
 
   const { activity, isLoading } = usePublicActivity(activityId);
   
@@ -129,7 +130,11 @@ export default function ActivityPageClient({ activityId }: { activityId: string 
               <div className="flex items-center gap-1 text-yellow-400 mb-4">
                 <Star className="h-5 w-5 fill-yellow-400" />
                 <span className="font-medium">
-                  {reviewStats?.averageRating ? reviewStats.averageRating.toFixed(1) : activity.rating && typeof activity.rating === 'number' ? activity.rating.toFixed(1) : 'N/A'}
+                  {(() => {
+                    if (reviewStats?.averageRating) return reviewStats.averageRating.toFixed(1);
+                    if (activity.rating && typeof activity.rating === "number") return activity.rating.toFixed(1);
+                    return "N/A";
+                  })()}
                 </span>
                 <span className="text-white/80 text-sm">
                   ({reviewStats?.totalReviews || 0} avaliações)
@@ -475,7 +480,7 @@ export default function ActivityPageClient({ activityId }: { activityId: string 
             <div className="lg:col-span-1">
               <div className="sticky top-8 space-y-6">
                 {/* Booking Form */}
-                {isAuthenticated && (
+                {isAuthenticated ? (
                   <ActivityBookingForm
                     activityId={activityId as Id<"activities">}
                     activity={activity}
@@ -484,6 +489,16 @@ export default function ActivityPageClient({ activityId }: { activityId: string 
                     }}
                     className="border border-gray-200 shadow-sm"
                   />
+                ) : (
+                  <Card className="border border-gray-200 shadow-sm">
+                    <CardContent className="pt-6 text-center space-y-4">
+                      <p className="text-gray-600">Faça login para reservar esta atividade</p>
+                      <Button onClick={() => router.push("/sign-in")} className="w-full">
+                        <LogIn className="mr-2 h-4 w-4" />
+                        Entrar para Reservar
+                      </Button>
+                    </CardContent>
+                  </Card>
                 )}
                 <HelpSection 
                   className="mt-4"
@@ -495,8 +510,6 @@ export default function ActivityPageClient({ activityId }: { activityId: string 
           </div>
         </div>
       </div>
-
-
     </div>
   );
 }

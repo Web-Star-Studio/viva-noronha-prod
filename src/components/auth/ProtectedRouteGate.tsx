@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
@@ -16,6 +16,7 @@ export function ProtectedRouteGate({ children }: { children: ReactNode }) {
   const router = useRouter();
   const isGuideRoute =
     pathname === GUIDE_ROUTE || pathname.startsWith(`${GUIDE_ROUTE}/`);
+  const lastDeniedRoleRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (isGuideRoute || isLoading) {
@@ -33,8 +34,11 @@ export function ProtectedRouteGate({ children }: { children: ReactNode }) {
   }, [isAuthenticated, isGuideRoute, isLoading, router, user]);
 
   useEffect(() => {
-    if (!isGuideRoute && user && !ALLOWED_ROLES.has(user.role || "traveler")) {
+    const userRole = user?.role || "traveler";
+    if (!isGuideRoute && user && !ALLOWED_ROLES.has(userRole) && lastDeniedRoleRef.current !== userRole) {
+      lastDeniedRoleRef.current = userRole;
       toast.error("Papel de usuário não reconhecido.", {
+        id: "protected-route-gate-denied",
         description: "Entre em contato com o suporte se o problema persistir.",
       });
     }

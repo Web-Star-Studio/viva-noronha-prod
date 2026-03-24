@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound, useRouter } from "next/navigation";
 import { useQuery, useConvexAuth } from "convex/react";
 import type { Id } from "@/../convex/_generated/dataModel";
-import { api } from "../../../../convex/_generated/api";
+import { api } from "@/../convex/_generated/api";
 import { ArrowLeft, Star, Users } from "lucide-react";
 
 // Shadcn components
@@ -67,8 +67,8 @@ export default function VehiclePageClient({ vehicleId }: { vehicleId: string }) 
     notFound();
   }
 
-  const galleryEntries = (vehicle?.galleryImages ?? []).map(parseMediaEntry);
-  const heroBaseEntry = parseMediaEntry(vehicle?.imageUrl ?? "");
+  const galleryEntries = (vehicle.galleryImages ?? []).map(parseMediaEntry);
+  const heroBaseEntry = parseMediaEntry(vehicle.imageUrl ?? "");
   const heroGalleryEntry = galleryEntries.find(
     (entry) => entry.url === heroBaseEntry.url,
   );
@@ -96,7 +96,7 @@ export default function VehiclePageClient({ vehicleId }: { vehicleId: string }) 
             />
           ) : (
             <Image
-              src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3"
+              src="/images/bg-pattern.png"
               alt={vehicle.name}
               fill
               className="object-cover brightness-[0.85]"

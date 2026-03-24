@@ -202,12 +202,14 @@ export default function PaymentSuccessPageClient({
                   {supportEmail}
                 </a>
                 <span className="hidden sm:inline text-gray-400">•</span>
-                <a 
-                  href={`tel:${supportPhone.replace(/\s+/g, "")}`}
-                  className="text-blue-600 hover:underline"
-                >
-                  {supportPhone}
-                </a>
+                {typeof supportPhone === "string" && supportPhone ? (
+                  <a
+                    href={`tel:${supportPhone.replace(/\s+/g, "")}`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    {supportPhone}
+                  </a>
+                ) : null}
               </div>
             </CardContent>
           </Card>

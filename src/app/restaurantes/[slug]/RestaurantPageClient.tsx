@@ -26,6 +26,16 @@ import { useReviewStats } from "@/lib/hooks/useReviews";
 import { HelpSection } from "@/components/contact/HelpSection";
 
 
+const DAYS_IN_PORTUGUESE: Record<string, string> = {
+  Monday: "Segunda-feira",
+  Tuesday: "Terça-feira",
+  Wednesday: "Quarta-feira",
+  Thursday: "Quinta-feira",
+  Friday: "Sexta-feira",
+  Saturday: "Sábado",
+  Sunday: "Domingo",
+};
+
 export default function RestaurantPageClient({ slug }: { slug: string }) {
   const { restaurant, isLoading } = useRestaurantBySlug(slug);
   
@@ -61,20 +71,9 @@ function RestaurantDetails({ restaurant }: { restaurant: RestaurantServiceType }
   const router = useRouter();
   // Get real review stats
   const { data: reviewStats } = useReviewStats({
-    assetType: "restaurant", 
-    assetId: restaurant._id!,
+    assetType: "restaurant",
+    assetId: restaurant._id ?? "",
   });
-
-  // Days translation to Portuguese
-  const daysInPortuguese: Record<string, string> = {
-    Monday: "Segunda-feira",
-    Tuesday: "Terça-feira", 
-    Wednesday: "Quarta-feira",
-    Thursday: "Quinta-feira",
-    Friday: "Sexta-feira",
-    Saturday: "Sábado",
-    Sunday: "Domingo"
-  };
 
   // Format operation hours for display
   const getOperationHoursForToday = () => {
@@ -88,8 +87,8 @@ function RestaurantDetails({ restaurant }: { restaurant: RestaurantServiceType }
     return "Fechado hoje";
   };
 
-  const galleryEntries = (restaurant?.galleryImages ?? []).map(parseMediaEntry);
-  const heroBaseEntry = parseMediaEntry(restaurant?.mainImage ?? "");
+  const galleryEntries = (restaurant.galleryImages ?? []).map(parseMediaEntry);
+  const heroBaseEntry = parseMediaEntry(restaurant.mainImage ?? "");
   const heroGalleryEntry = galleryEntries.find(
     (entry) => entry.url === heroBaseEntry.url,
   );
@@ -144,7 +143,7 @@ function RestaurantDetails({ restaurant }: { restaurant: RestaurantServiceType }
                   variant="secondary"
                   className="bg-white/20 backdrop-blur-sm"
                 >
-                  {restaurant.cuisine[0]}
+                  {restaurant.cuisine?.[0] ?? "Restaurante"}
                 </Badge>
                 <Badge
                   variant="secondary"
@@ -280,7 +279,7 @@ function RestaurantDetails({ restaurant }: { restaurant: RestaurantServiceType }
                     <div className="space-y-2">
                       {Object.entries(restaurant.operatingDays || {}).map(([day, isOpen]) => (
                         <div key={day} className="flex justify-between items-center py-1.5 border-b border-gray-100">
-                          <span className="font-medium">{daysInPortuguese[day] || day}</span>
+                          <span className="font-medium">{DAYS_IN_PORTUGUESE[day] || day}</span>
                           <span className="text-gray-600">
                             {isOpen ? `${restaurant.openingTime} - ${restaurant.closingTime}` : "Fechado"}
                           </span>

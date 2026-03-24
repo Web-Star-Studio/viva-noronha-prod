@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
@@ -13,6 +13,7 @@ export function AdminRouteGate({ children }: { children: ReactNode }) {
   const { user, isLoading, isAuthenticated } = useCurrentUser();
   const router = useRouter();
   const role = user?.role ?? "traveler";
+  const lastDeniedRoleRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (isLoading) {
@@ -30,8 +31,10 @@ export function AdminRouteGate({ children }: { children: ReactNode }) {
   }, [isAuthenticated, isLoading, router, user]);
 
   useEffect(() => {
-    if (user && !ADMIN_ALLOWED_ROLES.has(role)) {
+    if (user && !ADMIN_ALLOWED_ROLES.has(role) && lastDeniedRoleRef.current !== role) {
+      lastDeniedRoleRef.current = role;
       toast.error("Você não tem permissão para acessar a área administrativa.", {
+        id: "admin-route-gate-denied",
         description: "Área restrita a parceiros, funcionários e administradores.",
       });
     }

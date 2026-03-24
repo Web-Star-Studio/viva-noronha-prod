@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useSystemSettings } from "@/lib/hooks/useSystemSettings";
 import { CheckCircle2, Sparkles, ArrowRight, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,6 +18,7 @@ export default function SubscriptionSuccessPageClient({
   externalReference,
 }: SubscriptionSuccessPageClientProps) {
   const { user } = useUser();
+  const { supportEmail } = useSystemSettings();
 
   useEffect(() => {
     try {
@@ -137,8 +139,8 @@ export default function SubscriptionSuccessPageClient({
         <div className="mt-8 text-center text-sm text-gray-500">
           <p>
             Dúvidas? Entre em contato:{" "}
-            <a href="mailto:suporte@tucanoronha.com" className="text-blue-600 hover:underline">
-              suporte@tucanoronha.com
+            <a href={`mailto:${supportEmail}`} className="text-blue-600 hover:underline">
+              {supportEmail}
             </a>
           </p>
         </div>
