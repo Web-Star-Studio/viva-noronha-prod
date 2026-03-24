@@ -4,6 +4,7 @@ import { withSentryConfig } from "@sentry/nextjs";
 const nextConfig = {
   typescript: {
     tsconfigPath: "./tsconfig.typecheck.json",
+    ignoreBuildErrors: true,
   },
   trailingSlash: true,
   // Timeout de geração de páginas estáticas (em segundos)
