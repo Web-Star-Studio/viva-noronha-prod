@@ -1,0 +1,20 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+export default function NotFound() {
+  return (
+    <div className="container mx-auto flex min-h-[60vh] items-center justify-center px-4 py-12">
+      <div className="max-w-md text-center">
+        <h1 className="mb-3 text-3xl font-bold text-slate-900">
+          Veículo não encontrado
+        </h1>
+        <p className="mb-8 text-slate-600">
+          Este veículo não está mais disponível ou o link informado é inválido.
+        </p>
+        <Button asChild>
+          <Link href="/veiculos">Voltar para Veículos</Link>
+        </Button>
+      </div>
+    </div>
+  );
+}

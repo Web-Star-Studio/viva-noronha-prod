@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import type { ReactNode } from "react";
+import { createContext, useContext } from "react";
 import { useConvexAuth } from "convex/react";
 import { useUser } from "@clerk/nextjs";
 
@@ -8,11 +9,7 @@ interface AuthContextType {
   isLoading: boolean;
 }
 
-const AuthContext = createContext<AuthContextType>({
-  isAuthenticated: false,
-  userId: null,
-  isLoading: true,
-});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -21,37 +18,24 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { user: clerkUser, isLoaded: clerkLoaded } = useUser();
-  const [userId, setUserId] = useState<string | null>(null);
-  
-  // Obter o ID real do usuário do Clerk
-  useEffect(() => {
-    if (isAuthenticated && clerkUser && clerkLoaded && !userId) {
-      // Em produção, usamos o ID real do usuário do Clerk
-      setUserId(clerkUser.id);
-      
-      // Log para depuração (pode ser removido em produção)
-
-    } else if (!isAuthenticated) {
-      setUserId(null);
-    }
-  }, [isAuthenticated, clerkUser, clerkLoaded, userId]);
+  const userId = isAuthenticated && clerkLoaded && clerkUser ? clerkUser.id : null;
 
   return (
-    <AuthContext.Provider value={{ 
-      isAuthenticated, 
-      userId, 
+    <AuthContext.Provider value={{
+      isAuthenticated,
+      userId,
       // Consideramos que estamos carregando se o Clerk ainda estiver carregando OU se o Convex ainda está verificando
-      isLoading: isLoading || !clerkLoaded 
+      isLoading: isLoading || !clerkLoaded,
     }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-export function useAuth() {
+export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
-} 
+}

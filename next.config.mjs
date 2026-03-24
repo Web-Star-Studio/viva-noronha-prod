@@ -3,6 +3,7 @@ import { withSentryConfig } from "@sentry/nextjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
+    tsconfigPath: "./tsconfig.typecheck.json",
     ignoreBuildErrors: true,
   },
   trailingSlash: true,

@@ -17,7 +17,7 @@ export type OperatingDays = {
 // Tipos para representar um restaurante
 export type Restaurant = {
   id?: string;
-  _id?: Id<"restaurants">;
+  _id: Id<"restaurants">;
   _creationTime?: number;
   name: string;
   slug: string;
@@ -56,6 +56,7 @@ export type Restaurant = {
   };
   adminRating?: number; // Classificação definida pelo admin (0-5)
   acceptsReservations: boolean;
+  maximumPartySize?: number;
   tags: string[];
   executiveChef?: string;
   privatePartyInfo?: string;

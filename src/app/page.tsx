@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 import HeroSection from "@/components/hero/HeroSection";
@@ -10,6 +11,12 @@ import FeaturedRestaurants from "@/components/highlights/restaurants/FeaturedRes
 
 import FeaturedVehicles from "@/components/highlights/vehicles/FeaturedVehicles";
 import BookingCTA from "@/components/cta/BookingCTA";
+
+export const metadata: Metadata = {
+  title: "Viva Noronha | Experiências em Fernando de Noronha",
+  description:
+    "Reserve atividades, restaurantes, veículos e experiências em Fernando de Noronha com uma jornada mais rápida e preparada para SEO.",
+};
 
 export default function Home() {
   return (

@@ -7,7 +7,6 @@ import { ConvexReactClient } from "convex/react";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/lib/auth";
 import { QueryProvider } from "@/lib/providers/QueryProvider";
-import { OnboardingRedirect } from "@/components/onboarding/OnboardingRedirect";
 import { ClerkCaptchaProvider } from "@/components/ClerkCaptchaProvider";
 import { ptBR } from "@clerk/localizations";
 
@@ -21,9 +20,7 @@ export function Providers({ children }: { children: ReactNode }) {
         <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
           <AuthProvider>
             <QueryProvider>
-              <OnboardingRedirect>
-                {children}
-              </OnboardingRedirect>
+              {children}
               <Toaster richColors />
             </QueryProvider>
           </AuthProvider>

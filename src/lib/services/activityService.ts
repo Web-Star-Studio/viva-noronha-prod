@@ -6,7 +6,8 @@ import type { Id } from "@/../convex/_generated/dataModel";
 import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 
 // Helper function to query tickets - this will get tickets for an activity
-function queryTickets(): Promise<ActivityTicket[]> {
+function queryTickets(activityId: string): Promise<ActivityTicket[]> {
+  void activityId;
   return new Promise((resolve) => {
     // This is just a placeholder implementation
     // In a real app, you'd fetch the tickets from your backend
@@ -498,14 +499,14 @@ export const useCreateActivityTicket = () => {
   
   return async (ticketData: Omit<ActivityTicket, 'id' | 'createdAt'>) => {
     // Convert number fields to bigint for Convex
-    const convexData = {
+    const convexData: Parameters<typeof createTicketMutation>[0] = {
       ...ticketData,
       availableQuantity: ticketData.availableQuantity,
       maxPerOrder: ticketData.maxPerOrder,
     };
     
     try {
-      const ticketId = await createTicketMutation(convexData as any);
+      const ticketId = await createTicketMutation(convexData);
       return ticketId;
     } catch (error) {
       console.error("Error creating ticket:", error);
@@ -520,11 +521,13 @@ export const useUpdateActivityTicket = () => {
   return async (ticketData: ActivityTicket) => {
     const { id, createdAt: _createdAt, ...updateData } = ticketData;
     void _createdAt; // Avoid unused variable warning
-    
-    return await updateTicketMutation({
+
+    const mutationInput: Parameters<typeof updateTicketMutation>[0] = {
       id: id as Id<"activityTickets">,
       ...updateData,
-    } as any);
+    };
+    
+    return await updateTicketMutation(mutationInput);
   };
 };
 

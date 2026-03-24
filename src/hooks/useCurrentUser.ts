@@ -3,7 +3,7 @@
  */
 
 import { useCurrentUser as CurrentUserHook } from "@/lib/hooks/useCurrentUser";
-import { useEffect, useState } from 'react';
+import { useEffect } from "react";
 
 // Re-export the simpler implementation from the new location
 export const useCurrentUser = CurrentUserHook;
@@ -37,24 +37,23 @@ export function useIsAuthenticated(): {
  * @deprecated Use useAuth from '@/lib/auth' instead.
  */
 export function useRequireAuth(redirectUrl?: string) {
-  console.warn('useRequireAuth is deprecated. Use useAuth from @/lib/auth instead.');
   const { isAuthenticated, isLoading } = useIsAuthenticated();
-  const [isReady, setIsReady] = useState(false);
-  
+
   useEffect(() => {
-    if (!isLoading) {
-      setIsReady(true);
-      
-      // Redirecionar se não autenticado e redirectUrl fornecido
-      if (!isAuthenticated && redirectUrl) {
-        window.location.href = redirectUrl;
-      }
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("useRequireAuth is deprecated. Use useAuth from @/lib/auth instead.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated && redirectUrl) {
+      window.location.href = redirectUrl;
     }
   }, [isAuthenticated, isLoading, redirectUrl]);
-  
+
   return {
-    isReady,
+    isReady: !isLoading,
     isAuthenticated,
-    isLoading
+    isLoading,
   };
 }
